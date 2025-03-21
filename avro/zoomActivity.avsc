@@ -1,0 +1,18 @@
+{ 
+    "name": "zoomActivity",
+    "namespace": "iot",
+    "type": "record",
+    "doc": "Tracking zoom usage at home.",
+    "fields": [
+        {
+            "doc": "Time of zoom status.",
+            "name": "zoom_ts",
+            "type": "int"
+        },
+        {
+            "doc": "Description of zoom application usage.",
+            "name": "zoom_status",
+            "type": "string"
+        }
+    ]
+}

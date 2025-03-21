@@ -1,0 +1,5 @@
+config/config.yaml
+__pycache__
+classes/__pycache__
+helpers/__pycache__
+*.log

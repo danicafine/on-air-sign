@@ -1,0 +1,18 @@
+kafka:
+  bootstrap.servers: "[BOOTSTRAP_SERVERS]"
+  security.protocol: "SASL_SSL"
+  ssl.ca.location: "/etc/ssl/certs/ca-certificates.crt"
+  sasl.mechanisms: "PLAIN"
+  # for confluent kafka
+  sasl.username: "[API_KEY]"
+  sasl.password: "[API_SECRET]"
+  session.timeout.ms: 45000
+
+# Confluent Cloud Schema Registry
+schema-registry:
+  url: "[SR_URL]"
+  basic.auth.user.info: "[SR_API_KEY]:[SR_API_VALUE]"
+
+topics:
+  zoom: "zoom-activity"
+  camera: "camera-activity"

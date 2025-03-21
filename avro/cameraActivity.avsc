@@ -1,0 +1,23 @@
+{ 
+    "name": "cameraActivity",
+    "namespace": "iot",
+    "type": "record",
+    "doc": "Tracking computer camera activity at home.",
+    "fields": [
+        {
+            "doc": "Time of camera status.",
+            "name": "camera_ts",
+            "type": "int"
+        },
+        {
+            "doc": "Description of the camera's status.",
+            "name": "camera_status",
+            "type": "string"
+        },
+        {
+            "doc": "ID of the application affected.",
+            "name": "application_id",
+            "type": "string"
+        }
+    ]
+}
