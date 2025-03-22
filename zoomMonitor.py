@@ -23,7 +23,7 @@ if __name__ == '__main__':
     try:
         while True:
             # capture ts for record
-            ts = int(dt.datetime.now(dt.UTC).strftime('%s'))
+            ts = int(dt.datetime.now().strftime('%s'))
 
             # parse output of command
             p = int(subprocess.getoutput([cmd]))
