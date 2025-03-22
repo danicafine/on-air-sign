@@ -8,7 +8,7 @@ class ZoomActivity(object):
 
     @staticmethod
     def get_schema():
-        with open('./avro/zoomActivity.avsc', 'r') as handle:
+        with open('/Users/dfine/Documents/on-air-sign/avro/zoomActivity.avsc', 'r') as handle:
             return handle.read()
     
     def __init__(self, zoom_ts, zoom_status):

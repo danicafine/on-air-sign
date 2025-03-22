@@ -11,7 +11,7 @@ import yaml
 
 def config():
 	# fetches the configs from the available file
-	with open('./config/config.yaml', 'r') as config_file:
+	with open('/Users/dfine/Documents/on-air-sign/config/config.yaml', 'r') as config_file:
 		config = yaml.load(config_file, Loader=yaml.CLoader)
 
 		return config
