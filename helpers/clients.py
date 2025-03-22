@@ -57,13 +57,13 @@ def zoom_activity_serializer():
 		)
 
 
-def producer(value_serializer):
-	producer_conf = config()['kafka'] | { 'value.serializer': value_serializer }
+def producer(value_serializer, conf):
+	producer_conf = config()[conf] | { 'value.serializer': value_serializer }
 	return SerializingProducer(producer_conf)
 
 
-def consumer(value_deserializer, group_id, topics):
-	consumer_conf = config()['kafka'] | {'value.deserializer': value_deserializer,
+def consumer(value_deserializer, conf, group_id, topics):
+	consumer_conf = config()[conf] | {'value.deserializer': value_deserializer,
 										  'group.id': group_id,
 										  'auto.offset.reset': 'earliest',
 										  'enable.auto.commit': 'false'

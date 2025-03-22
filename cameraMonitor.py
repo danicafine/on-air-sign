@@ -8,8 +8,8 @@ logger = logging.set_logging('camera_activity_monitor')
 config = clients.config()
 
 
-# Extracts camera activity events from input logs.
-# Ignores lines that aren't relevant.
+# extracts camera activity events from input logs.
+# ignores lines that aren't relevant.
 def extract_camera_activity(log_line):
     try:
         # line contain items we KNOW aren't camera activity
@@ -45,12 +45,12 @@ def extract_camera_activity(log_line):
 
 if __name__ == '__main__':
     # set up Kafka Producer for CameraActivity
-    producer = clients.producer(clients.camera_activity_serializer())
+    producer = clients.producer(clients.camera_activity_serializer(), 'kafka-mac')
 
-    # Hard-coded command to capture camera activity on MacOS.
+    # hard-coded command to capture camera activity on MacOS.
     cmd = 'log stream --predicate \'(eventMessage CONTAINS \"AVCaptureSessionDidStartRunningNotification\" || eventMessage CONTAINS \"AVCaptureSessionDidStopRunningNotification\")\''
 
-    # Parse command and set up subprocess to monitor the stdout.
+    # parse command and set up subprocess to monitor the stdout.
     args = shlex.split(cmd)
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 
@@ -65,7 +65,6 @@ if __name__ == '__main__':
             if ca is not None:
                 # produce camera activity event
                 logger.info(f"Publishing message: key, value: ({ca.application_id},{ca})")
-                print(f"Publishing message: key, value: ({ca.application_id},{ca})")
                 producer.produce(config['topics']['camera'], key=ca.application_id, value=ca, timestamp=ca.camera_ts * 1000) 
         finally:
             producer.flush()

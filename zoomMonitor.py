@@ -10,9 +10,9 @@ config = clients.config()
 
 if __name__ == '__main__':
     # set up Kafka Producer for ZoomActivity
-    producer = clients.producer(clients.zoom_activity_serializer())
+    producer = clients.producer(clients.zoom_activity_serializer(), 'kafka-mac')
 
-    # Hard-coded command to check current zoom activity on MacOS.
+    # hard-coded command to check current zoom activity on MacOS.
     cmd = 'lsof -i 4UDP | grep zoom | awk \'END{print NR}\''
 
     # current status
@@ -24,7 +24,7 @@ if __name__ == '__main__':
             # capture ts for record
             ts = int(dt.datetime.now(dt.UTC).strftime('%s'))
 
-            # Parse output of command
+            # parse output of command
             p = int(subprocess.getoutput([cmd]))
             
             # extract event from the log line
