@@ -2,7 +2,7 @@ mac:
   kafka:
     bootstrap.servers: "[BOOTSTRAP_SERVERS]"
     security.protocol: "SASL_SSL"
-    ssl.ca.location: "/etc/ssl/certs/ca-certificates.crt"
+    ssl.ca.location: "[PATH_TO_CERTS_ON_MAC]"
     sasl.mechanisms: "PLAIN"
     # for confluent kafka
     sasl.username: "[API_KEY]"
@@ -13,7 +13,7 @@ pi:
   kafka:
     bootstrap.servers: "[BOOTSTRAP_SERVERS]"
     security.protocol: "SASL_SSL"
-    ssl.ca.location: "/etc/ssl/certs/ca-certificates.crt"
+    ssl.ca.location: "[PATH_TO_CERTS_ON_PI]"
     sasl.mechanisms: "PLAIN"
     # for confluent kafka
     sasl.username: "[API_KEY]"
