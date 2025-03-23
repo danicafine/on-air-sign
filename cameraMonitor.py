@@ -5,9 +5,9 @@ import shlex, re
 from classes.cameraActivity import CameraActivity 
 from helpers import clients,logging
 
-logger = logging.set_logging('camera_activity_monitor')
-config = clients.config()
 
+config = clients.config('/Users/dfine/Documents/on-air-sign/config/config.yaml')
+logger = logging.set_logging('camera_activity_monitor', config['mac']['logging.directory'])
 
 # extracts camera activity events from input logs.
 # ignores lines that aren't relevant.
@@ -46,7 +46,7 @@ def extract_camera_activity(log_line):
 
 if __name__ == '__main__':
     # set up Kafka Producer for CameraActivity
-    producer = clients.producer(clients.camera_activity_serializer(), 'kafka-mac')
+    producer = clients.producer(clients.camera_activity_serializer(config), config['mac']['kafka'])
 
     # hard-coded command to capture camera activity on MacOS.
     cmd = 'log stream --predicate \'(eventMessage CONTAINS \"AVCaptureSessionDidStartRunningNotification\" || eventMessage CONTAINS \"AVCaptureSessionDidStopRunningNotification\")\''
@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
             if ca is not None:
                 # produce camera activity event
-                logger.info(f"Publishing message: key, value: ({ca.application_id},{ca})")
-                producer.produce(config['topics']['camera'], key=ca.application_id, value=ca, timestamp=ca.camera_ts * 1000) 
+                logger.info(f"Publishing message: key, value: (workmac,{ca})")
+                producer.produce(config['topics']['camera'], key='workmac', value=ca, timestamp=ca.camera_ts * 1000) 
         finally:
             producer.flush()

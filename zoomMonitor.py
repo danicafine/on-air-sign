@@ -6,12 +6,13 @@ import datetime as dt
 from classes.zoomActivity import ZoomActivity 
 from helpers import clients,logging
 
-logger = logging.set_logging('zoom_activity_monitor')
-config = clients.config()
+
+config = clients.config('/Users/dfine/Documents/on-air-sign/config/config.yaml')
+logger = logging.set_logging('zoom_activity_monitor', config['mac']['logging.directory'])
 
 if __name__ == '__main__':
     # set up Kafka Producer for ZoomActivity
-    producer = clients.producer(clients.zoom_activity_serializer(), 'kafka-mac')
+    producer = clients.producer(clients.zoom_activity_serializer(config), config['mac']['kafka'])
 
     # hard-coded command to check current zoom activity on MacOS.
     cmd = 'lsof -i 4UDP | grep zoom | awk \'END{print NR}\''
@@ -39,8 +40,8 @@ if __name__ == '__main__':
                 za = ZoomActivity(ts, status)
 
                 # produce zoom activity event
-                logger.info(f"Publishing message: {za}")
-                producer.produce(config['topics']['zoom'], key='zoom.us', value=za, timestamp=za.zoom_ts * 1000)
+                logger.info(f"Publishing message: key, value: (workmac,{za})")
+                producer.produce(config['topics']['zoom'], key='workmac', value=za, timestamp=za.zoom_ts * 1000)
                 producer.flush()
 
                 current_status = status
