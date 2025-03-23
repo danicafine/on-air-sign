@@ -1,12 +1,25 @@
-kafka:
-  bootstrap.servers: "[BOOTSTRAP_SERVERS]"
-  security.protocol: "SASL_SSL"
-  ssl.ca.location: "/etc/ssl/certs/ca-certificates.crt"
-  sasl.mechanisms: "PLAIN"
-  # for confluent kafka
-  sasl.username: "[API_KEY]"
-  sasl.password: "[API_SECRET]"
-  session.timeout.ms: 45000
+mac:
+  kafka:
+    bootstrap.servers: "[BOOTSTRAP_SERVERS]"
+    security.protocol: "SASL_SSL"
+    ssl.ca.location: "/etc/ssl/certs/ca-certificates.crt"
+    sasl.mechanisms: "PLAIN"
+    # for confluent kafka
+    sasl.username: "[API_KEY]"
+    sasl.password: "[API_SECRET]"
+  logging.directory: "[LOGGING_DIRECTORY]" 
+  
+pi:
+  kafka:
+    bootstrap.servers: "[BOOTSTRAP_SERVERS]"
+    security.protocol: "SASL_SSL"
+    ssl.ca.location: "/etc/ssl/certs/ca-certificates.crt"
+    sasl.mechanisms: "PLAIN"
+    # for confluent kafka
+    sasl.username: "[API_KEY]"
+    sasl.password: "[API_SECRET]"
+    session.timeout.ms: 45000
+  logging.directory: "[LOGGING_DIRECTORY]"
 
 # Confluent Cloud Schema Registry
 schema-registry:
