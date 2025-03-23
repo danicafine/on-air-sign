@@ -65,8 +65,8 @@ def producer(value_serializer, conf):
 def consumer(value_deserializer, conf, group_id, topics):
 	consumer_conf = conf | {'value.deserializer': value_deserializer,
 										  'group.id': group_id,
-										  'auto.offset.reset': 'earliest',
-										  'enable.auto.commit': 'false'
+										  'auto.offset.reset': 'latest',
+										  'enable.auto.commit': 'true'
 										  }
 
 	consumer = DeserializingConsumer(consumer_conf)
