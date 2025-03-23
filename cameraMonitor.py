@@ -6,7 +6,8 @@ from classes.cameraActivity import CameraActivity
 from helpers import clients,logging
 
 
-config = clients.config('/Users/dfine/Documents/on-air-sign/config/config.yaml')
+# replace with absolute path to config file when setting up with launchctl
+config = clients.config('./config/config.yaml')
 logger = logging.set_logging('camera_activity_monitor', config['mac']['logging.directory'])
 
 # extracts camera activity events from input logs.

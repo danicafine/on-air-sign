@@ -9,7 +9,8 @@ class CameraActivity(object):
 
     @staticmethod
     def get_schema():
-        with open('/Users/dfine/Documents/on-air-sign/avro/cameraActivity.avsc', 'r') as handle:
+        # replace with absolute path to file when setting up with launchctl
+        with open('./avro/cameraActivity.avsc', 'r') as handle:
             return handle.read()
     
     def __init__(self, camera_ts, camera_status, application_id):

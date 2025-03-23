@@ -7,7 +7,7 @@ from classes.zoomActivity import ZoomActivity
 from helpers import clients,logging
 
 
-config = clients.config('/Users/dfine/Documents/on-air-sign/config/config.yaml')
+config = clients.config('./config/config.yaml')
 logger = logging.set_logging('zoom_activity_monitor', config['mac']['logging.directory'])
 
 if __name__ == '__main__':
