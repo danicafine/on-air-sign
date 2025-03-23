@@ -5,7 +5,7 @@
     <key>Label</key>
     <string>iot.on-air.zoom-monitor</string>
     <key>Program</key>
-    <string>/Users/dfine/Documents/on-air-sign/zoomMonitor.py</string>
+    <string>[UPDATE_PATH]/zoomMonitor.py</string>
     <key>KeepAlive</key>
     <true/>
   </dict>

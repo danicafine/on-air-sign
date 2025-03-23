@@ -5,7 +5,7 @@
     <key>Label</key>
     <string>iot.on-air.camera-monitor</string>
     <key>Program</key>
-    <string>/Users/dfine/Documents/on-air-sign/cameraMonitor.py</string>
+    <string>[UPDATE PATH]/cameraMonitor.py</string>
     <key>KeepAlive</key>
     <true/>
   </dict>
