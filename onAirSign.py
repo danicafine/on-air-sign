@@ -1,6 +1,6 @@
 import time
 
-#from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
+from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 from confluent_kafka.error import SerializationError
 
 from helpers import clients,logging
@@ -58,15 +58,16 @@ if __name__ == '__main__':
 	matrix = RGBMatrix(options=options)
 
 	font = graphics.Font()
-	font.LoadFont("/home/pi/rpi-rgb-led-matrix/fonts/9x18.bdf")
-	textColor = graphics.Color(0,0,255)
+	font.LoadFont("../rpi-rgb-led-matrix/fonts/9x18.bdf")
+	red = graphics.Color(0,0,255)
+	white = graphics.Color(255,255,255)
 
 	canvas = matrix.CreateFrameCanvas()
 
     c_on = False
     z_on = False
 
-    # start readings capture loop
+    # start sign update loop
     try:
         while True:
             # fetch latest camera status
@@ -75,16 +76,17 @@ if __name__ == '__main__':
             # fetch latest zoom status
             z_on = get_z_status(z_consumer, z_on)
 
-            print(f"Status: {c_on or z_on}")
-
             # update on air sign
             if c_on or z_on:
 	            canvas.Clear()
-				graphics.DrawText(canvas, font, 23, 25, textColor, 'ON')
-				graphics.DrawText(canvas, font, 18, 45, textColor, 'AIR')
+				graphics.DrawText(canvas, font, 23, 25, red, 'ON')
+				graphics.DrawText(canvas, font, 18, 45, red, 'AIR')
 			else:
-				#canvas.Clear()
-
+				canvas.Clear()
+				graphics.DrawText(canvas, font, 10, 25, white, 'HELLO')
+				graphics.DrawText(canvas, font, 10, 45, white, 'WORLD')
+			
+			canvas = matrix.SwapOnVSync(canvas)
             time.sleep(1)
     except Exception as e:
         	logger.error("Got exception %s", e)
