@@ -46,6 +46,6 @@ if __name__ == '__main__':
 
                 current_status = status
             
-            time.sleep(5)
+            time.sleep(1)
     finally:
         producer.flush()
